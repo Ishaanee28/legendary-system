@@ -12,8 +12,10 @@ function preload(){
     knifeImage=loadImage("images/knifeImage.png")
     bulbImage=loadImage("images/bulbImage.png")
     zombieImage=loadImage("images/zombieImage.png")
-    girlAnimation=loadAnimation("images/girl1.png","images/girl2.png")
+    girlAnimation=loadAnimation("images/girl1.png","images/girl2.png","images/girl3.png","images/girl4.png","images/girl5.png","images/girl6.png","images/girl7.png","images/girl8.png")
     sad=loadImage("images/sad.png")
+    happy=loadImage("images/happy.png")
+    //life=loadImage("images/heart.png")
 }
 
 function setup(){
@@ -35,6 +37,12 @@ function setup(){
     knifeGroup=new Group();
     emoji=createSprite(90,15,10,10)
     emoji.visible=false;
+    life1=createSprite(770,20,5,5)
+    life2=createSprite(780,20,5,5)
+    life3=createSprite(790,20,5,5)
+    life1.addImage(life)
+    life2.addImage(life)
+    life3.addImage(life)
 }
 
 function draw(){
@@ -54,6 +62,17 @@ if(gameState!="end"){
 if(keyDown("space")){
     girl.velocityY=-10;
 }
+if(lives==2){
+life1.visible=false;
+}
+if(lives==1){
+    life2.visible=false;
+}
+if(lives<=0){
+    life1.visible=false;
+    life2.visible=false;
+    life3.visible=false;
+}
 spawnBulb();
 spawnKnife();
 if(girl.isTouching(bulbGroup)){
@@ -63,7 +82,7 @@ if(girl.isTouching(bulbGroup)){
 }
 if(score<5&&score>1){
 emoji.visible=true;
-emoji.addImage(sad)
+emoji.addImage(happy)
 emoji.scale=0.05
 }
 //add is touching for knife group
